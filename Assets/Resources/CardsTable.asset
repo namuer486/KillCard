@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27826a60c09d8254faa6d712d9262274, type: 3}
+  m_Name: CardsTable
+  m_EditorClassIdentifier: 
+  kards:
+  - id: 1
+    name: Basic Strike
+    content: "\u9020\u6210 10 \u70B9\u4F24\u5BB3"
+    type: 1
+    buff: 0
+    number: 10
+    buffnumber: 0
+    livenumber: 0
+    sprite: {fileID: 0}
+  - id: 2
+    name: Healing Potion
+    content: "\u6062\u590D 15 \u70B9\u751F\u547D\u503C"
+    type: 2
+    buff: 0
+    number: 15
+    buffnumber: 0
+    livenumber: 0
+    sprite: {fileID: 0}
+  - id: 3
+    name: Shield Ward
+    content: "\u83B7\u5F97 8 \u70B9\u62A4\u76FE"
+    type: 3
+    buff: 0
+    number: 8
+    buffnumber: 0
+    livenumber: 1
+    sprite: {fileID: 0}
+  - id: 4
+    name: Power Up
+    content: "\u653B\u51FB\u529B + 5\uFF0C\u6301\u7EED 3 \u56DE\u5408"
+    type: 0
+    buff: 1
+    number: 0
+    buffnumber: 5
+    livenumber: 3
+    sprite: {fileID: 0}
+  - id: 5
+    name: Iron Skin
+    content: "\u9632\u5FA1\u529B + 3\uFF0C\u6301\u7EED 2 \u56DE\u5408"
+    type: 0
+    buff: 2
+    number: 0
+    buffnumber: 3
+    livenumber: 2
+    sprite: {fileID: 0}
+  - id: 6
+    name: Furious Blow
+    content: "\u9020\u6210 12 \u70B9\u4F24\u5BB3\uFF0C\u653B\u51FB\u529B + 2\uFF0C\u6301\u7EED
+      1 \u56DE\u5408"
+    type: 1
+    buff: 1
+    number: 12
+    buffnumber: 2
+    livenumber: 1
+    sprite: {fileID: 0}

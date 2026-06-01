@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e47dd4324190ff549b218c1ccb47645f, type: 3}
+  m_Name: EnemyTable
+  m_EditorClassIdentifier: 
+  enemies:
+  - id: 1
+    name: Goblin Soldier
+    HP: 120
+    type: 0
+    sprite: {fileID: 0}
+  - id: 2
+    name: Skeleton Soldier
+    HP: 150
+    type: 0
+    sprite: {fileID: 0}
+  - id: 3
+    name: Orc Warrior
+    HP: 200
+    type: 0
+    sprite: {fileID: 0}
+  - id: 4
+    name: Poison Spider
+    HP: 180
+    type: 0
+    sprite: {fileID: 0}
+  - id: 5
+    name: Bat Swarm
+    HP: 100
+    type: 0
+    sprite: {fileID: 0}
+  - id: 6
+    name: Werewolf
+    HP: 220
+    type: 0
+    sprite: {fileID: 0}
+  - id: 7
+    name: Slime
+    HP: 160
+    type: 0
+    sprite: {fileID: 0}
+  - id: 8
+    name: Bandit
+    HP: 190
+    type: 0
+    sprite: {fileID: 0}
+  - id: 9
+    name: Minotaur Chieftain
+    HP: 1500
+    type: 1
+    sprite: {fileID: 0}
+  - id: 10
+    name: Black Dragon Lord
+    HP: 2000
+    type: 1
+    sprite: {fileID: 0}
