@@ -22,10 +22,14 @@ public class EnemyManager
     public EnemyManager()
     {
         enemies = new List<Enemy>();
-        EnemyTable configs = FrameworkCore.Resourse.ResourcesLoad<EnemyTable>("EnemyTable");
-        foreach (EnemyConfig cfg in configs.enemies)
+        EnemyTable configs = FrameworkCore.Resourse.ResourcesLoad<EnemyTable>(ABConfig.Table,"EnemyTable");
+        BuffTable buffconfigs = FrameworkCore.Resourse.ResourcesLoad<BuffTable>(ABConfig.Table, "BuffTable");
+        List<Buff> buffs = new List<Buff>();//出招表
+        for (int i = 0;i<configs.enemies.Count;i++)
         {
-            Enemy enemy = new Enemy(cfg);
+            Buff buff=GameCore.BuffFactory.GetBuff(buffconfigs.m_BuffList[0]);
+            buffs.Add(buff);
+            Enemy enemy = new Enemy(configs.enemies[i], buffs,this);
             enemies.Add(enemy);
         }
         FrameworkCore.Event.Add<int>(this, "LoadCurrentEnemy", LoadCurrentEnemy);
@@ -38,5 +42,15 @@ public class EnemyManager
             return;
         }
         currentenemy = enemies[id];
+        currentenemy.Reset();
+    }
+    public void EnemyDie(Enemy enemy)
+    {
+        enemies.Remove(enemy);
+        currentenemy=null;
+        //返回地图
+        //弹出奖励窗口
+        FrameworkCore.Event.OnTriggerEven("AttackWin");
+
     }
 }

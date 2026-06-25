@@ -26,7 +26,7 @@ public class GameCore : MonoBehaviour
         Init();
         DontDestroyOnLoad(gameObject);
     }
-    private StateManager<GameType> GameManager = null;
+    public static StateManager<GameType> GameManager = null;
     public bool Is_Pause {  get; internal set; }
     public HandCardUi HandCardPrefab { get; private set; }
 
@@ -35,9 +35,12 @@ public class GameCore : MonoBehaviour
     public static EnemyManager Enemy = null;
     public static CharacterFactory CharacterFactory = null;
     public static CardsFactory CardsFactory = null;
+    public static BuffFactory BuffFactory = null;
     public static HandCardManager HandCard = null;
     public static BackPackManager BackPack = null;
     public static Pool<HandCardUi> HandCardPool = null;
+    public static BuffManager Buff = null;
+    public static MapManager Map = null;
 
     private void Update()
     {
@@ -58,19 +61,23 @@ public class GameCore : MonoBehaviour
         GameManager.ChangeState(GameType.init);
         //内部功能初始化
         Input = InputManager.Instance;
+        BuffFactory = BuffFactory.Instance;
         Player = PlayerManager.Instance;
         Enemy = EnemyManager.Instance;
         CharacterFactory = CharacterFactory.Instance;
         CardsFactory = CardsFactory.Instance;
-        HandCard = HandCardManager.Instance;
         BackPack = BackPackManager.Instance;
+        HandCard = HandCardManager.Instance;//卡牌管理强依赖于背包/卡组
+        Buff= BuffManager.Instance;
+        Map = MapManager.Instance;
+
         //对象池初始化(需要剥离为Card Pool)
-        HandCardPrefab = FrameworkCore.Resourse.ResourcesLoad<HandCardUi>("Prefab/HandCard");
+        HandCardPrefab = FrameworkCore.Resourse.ResourcesLoad<HandCardUi>(ABConfig.Card, "handcard");
         if (HandCardPrefab == null)
         {
             Debug.LogError("卡牌预制体不存在");
         }
-        HandCardPool = new Pool<HandCardUi>(HandCardPrefab, 10);
+        HandCardPool = new Pool<HandCardUi>(HandCardPrefab, 20,transform);
 
         FrameworkCore.Senes.ChangeScene(GameType.menu);
     }

@@ -271,6 +271,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 542008657}
+  - component: {fileID: 542008658}
   m_Layer: 5
   m_Name: CharacterKard
   m_TagString: Untagged
@@ -299,6 +300,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &542008658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 542008656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e051791c7a362348bc2374afde09930, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &805381287
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,7 +417,6 @@ GameObject:
   - component: {fileID: 1267019643}
   - component: {fileID: 1267019642}
   - component: {fileID: 1267019641}
-  - component: {fileID: 1267019645}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -495,19 +507,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1267019645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1267019640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e051791c7a362348bc2374afde09930, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CardUI: {fileID: 1726857272434850792, guid: be654b750f3552d48b0da139e931b966, type: 3}
 --- !u!1 &1847044549
 GameObject:
   m_ObjectHideFlags: 0

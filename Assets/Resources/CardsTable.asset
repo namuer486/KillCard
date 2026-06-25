@@ -15,56 +15,56 @@ MonoBehaviour:
   kards:
   - id: 1
     name: Basic Strike
-    content: "\u9020\u6210 10 \u70B9\u4F24\u5BB3"
+    content: Deal 10 damage
     type: 1
-    buff: 0
-    number: 10
-    buffnumber: 0
-    livenumber: 0
+    BuffID: -1
+    totype: 1
+    number: 100
     sprite: {fileID: 0}
+    weight: 0
   - id: 2
     name: Healing Potion
-    content: "\u6062\u590D 15 \u70B9\u751F\u547D\u503C"
+    content: Restore 15 HP
     type: 2
-    buff: 0
+    BuffID: -1
+    totype: 0
     number: 15
-    buffnumber: 0
-    livenumber: 0
     sprite: {fileID: 0}
+    weight: 0
   - id: 3
     name: Shield Ward
-    content: "\u83B7\u5F97 8 \u70B9\u62A4\u76FE"
+    content: Gain 8 shield
     type: 3
-    buff: 0
+    BuffID: -1
+    totype: 0
     number: 8
-    buffnumber: 0
-    livenumber: 1
     sprite: {fileID: 0}
+    weight: 0
   - id: 4
     name: Power Up
-    content: "\u653B\u51FB\u529B + 5\uFF0C\u6301\u7EED 3 \u56DE\u5408"
+    content: Attack +5 for 3 turns
     type: 0
-    buff: 1
+    BuffID: 0
+    totype: 0
     number: 0
-    buffnumber: 5
-    livenumber: 3
     sprite: {fileID: 0}
+    weight: 0
   - id: 5
     name: Iron Skin
-    content: "\u9632\u5FA1\u529B + 3\uFF0C\u6301\u7EED 2 \u56DE\u5408"
+    content: Defense +3 for 2 turns
     type: 0
-    buff: 2
+    BuffID: 1
+    totype: 0
     number: 0
-    buffnumber: 3
-    livenumber: 2
     sprite: {fileID: 0}
+    weight: 0
   - id: 6
     name: Furious Blow
-    content: "\u9020\u6210 12 \u70B9\u4F24\u5BB3\uFF0C\u653B\u51FB\u529B + 2\uFF0C\u6301\u7EED
-      1 \u56DE\u5408"
+    content: Deal 12 damage, Attack +2 for 1 turn
     type: 1
-    buff: 1
+    BuffID: 0
+    totype: 1
     number: 12
-    buffnumber: 2
-    livenumber: 1
     sprite: {fileID: 0}
+    weight: 0
+  lesskards: []

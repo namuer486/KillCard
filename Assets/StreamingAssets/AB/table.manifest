@@ -1,0 +1,40 @@
+ManifestFileVersion: 0
+UnityVersion: 2023.2.20f1c1
+CRC: 713934468
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: aae9932ad85e0d5b36cd36edf00662c5
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: dd099e4aeff409f774e966b1d113a67e
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 0678eeabf7f15c0e8eb9fa0d2c8c5eba
+HashAppended: 0
+ClassTypes:
+- Class: 114
+  Script: {fileID: 11500000, guid: 318962cae6ebbcb4d9b42492e9502a9b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 448dfc747637e444fb72b7ef9eab46dd, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 27826a60c09d8254faa6d712d9262274, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e47dd4324190ff549b218c1ccb47645f, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Assembly-CSharp
+  ClassName: .BuffConfig
+- AssemblyName: Assembly-CSharp
+  ClassName: .CardConfig
+- AssemblyName: Assembly-CSharp
+  ClassName: .EnemyConfig
+- AssemblyName: Assembly-CSharp
+  ClassName: .PlayerConfig
+Assets:
+- Assets/Resources/CardsTable.asset
+- Assets/Resources/PlayersTable.asset
+- Assets/Resources/BuffTable.asset
+- Assets/Resources/EnemyTable.asset
+Dependencies: []

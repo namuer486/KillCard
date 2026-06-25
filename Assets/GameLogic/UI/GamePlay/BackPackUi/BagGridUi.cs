@@ -2,23 +2,50 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
-public class BagGridUi : MonoBehaviour
+public class BagGridUi : MonoBehaviour, IPoolable
 {
     public CardConfig cardConfig {  get; private set; }
-    private void Start()
+    public TextMeshProUGUI content { get;private set; }
+    public TextMeshProUGUI Name { get;private set; }
+    public Image image { get;private set; }
+
+    private void Awake()
     {
-        if(cardConfig == null)
+        content = transform.Find("CardContent").GetComponent<TextMeshProUGUI>();
+        Name = transform.Find("CardName").GetComponent<TextMeshProUGUI>();
+        image = transform.Find("CardIma").GetComponent<Image>();
+    }
+    public void UpDateCardUI(CardConfig cardConfig)
+    {
+        if (cardConfig == null)
         {
-            Debug.LogError("ø®≈∆UIŒ¥≈‰÷√");
             return;
         }
-        TextMeshProUGUI content =  transform.Find("CardContent").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI name =  transform.Find("CardName").GetComponent<TextMeshProUGUI>();
-        Image image =transform.Find("CardIma").GetComponent<Image>();
-        content.text=cardConfig.content;
-        name.text=cardConfig.name;
+        this.cardConfig = cardConfig;
+        content.text = cardConfig.content;
+        Name.text = cardConfig.name;
         image.sprite = cardConfig.sprite;
+    }
+    public void OnGet()
+    {
+        if (cardConfig == null)
+        {
+            gameObject.SetActive(true);
+            return;
+        }
+        content.text = cardConfig.content;
+        Name.text = cardConfig.name;
+        image.sprite = cardConfig.sprite;
+        gameObject.SetActive(true);
+    }
+    public void OnBack()
+    {
+        cardConfig = null;
+        content.text = null;
+        Name.text = null;
+        image.sprite = null;
+        gameObject.SetActive(false);
     }
 }

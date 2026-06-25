@@ -1,0 +1,23 @@
+ManifestFileVersion: 0
+UnityVersion: 2023.2.20f1c1
+CRC: 1595092645
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: character
+      Dependencies: {}
+    Info_1:
+      Name: map
+      Dependencies: {}
+    Info_2:
+      Name: menu
+      Dependencies: {}
+    Info_3:
+      Name: normal
+      Dependencies: {}
+    Info_4:
+      Name: table
+      Dependencies: {}
+    Info_5:
+      Name: card
+      Dependencies: {}

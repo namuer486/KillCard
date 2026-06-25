@@ -6,23 +6,28 @@ using UnityEngine;
 public class PlayerUi : MonoBehaviour
 {
     public Player player { get; internal set; }
+    public TextMeshProUGUI Name {  get; internal set; }
+    public TextMeshProUGUI HP {  get; internal set; }
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        if (player == null)
+        Name = transform.Find("name").GetComponent<TextMeshProUGUI>();
+        HP = transform.Find("HP").GetComponent<TextMeshProUGUI>();
+        FrameworkCore.Event.Add(this, "UpDateUI", UpDateUI);
+
+        UpDateUI();
+    }
+    public void UpDateUI()
+    {
+        player=GameCore.Player.currentplayer;
+        if (Name != null)
         {
-            Debug.LogError("Íæ¼ÒÎ´Ñ¡Ôñ");
-            return;
+            Name.text = player.Config.name;
         }
-        TextMeshProUGUI name = transform.Find("name").GetComponent<TextMeshProUGUI>();
-        if (name != null)
+        if (HP != null)
         {
-            name.text = player.config.name;
+            HP.text = "HP:" + player.HP.ToString();
         }
-        TextMeshProUGUI hp= transform.Find("HP").GetComponent<TextMeshProUGUI>();
-        if (hp != null)
-        {
-            hp.text = "HP:" + player.config.HP.ToString();
-        }
+
     }
 }

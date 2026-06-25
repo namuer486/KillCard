@@ -37,13 +37,13 @@ public class CharacterFactory : MonoBehaviour
     }
     void OnEnable()
     {
-        PlayerAni = FrameworkCore.Resourse.ResourcesLoad<Transform>("Prefab/Player");
-        EnemyAni = FrameworkCore.Resourse.ResourcesLoad<Transform>("Prefab/Enemy");
+        //PlayerAni = FrameworkCore.Resourse.ResourcesLoad<Transform>(ABConfig.Character, "Player");
+        //EnemyAni = FrameworkCore.Resourse.ResourcesLoad<Transform>(ABConfig.Character, "Enemy");
     }
     public void PlayerCreate(Transform Parent)
     {
         //玩家初始化
-        PlayerAni = FrameworkCore.Resourse.ResourcesLoad<Transform>("Prefab/Player");
+        PlayerAni = FrameworkCore.Resourse.ResourcesLoad<GameObject>(ABConfig.Character, "Player").transform;
         if (PlayerAni == null)
         {
             Debug.LogError("角色预制体未配置");
@@ -58,7 +58,7 @@ public class CharacterFactory : MonoBehaviour
     public void EnemyCreate(Transform Parent)
     {
         //敌人初始化
-        EnemyAni = FrameworkCore.Resourse.ResourcesLoad<Transform>("Prefab/Enemy");
+        EnemyAni = FrameworkCore.Resourse.ResourcesLoad<GameObject>(ABConfig.Character, "Enemy").transform;
         if (EnemyAni == null)
         {
             Debug.LogError("敌人预制体未配置");

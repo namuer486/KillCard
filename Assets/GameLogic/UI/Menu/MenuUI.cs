@@ -6,27 +6,33 @@ using UnityEngine.UI;
 public class MenuUI : MonoBehaviour,BasePanel
 {
     public Button StartUI;
+    public Button Internet;
+    public Transform BackGrand;
     // Start is called before the first frame update
-    void OnEnable()
+    void Start()
     {
         StartUI.onClick.AddListener(ChangeToStart);
-        FrameworkCore.UI.Push(UILaye.Main, this);
+        Internet.onClick.AddListener(InterNetStart);
     }
     private void ChangeToStart()
+    {
+        FrameworkCore.Senes.ChangeScene(GameType.charactor);
+    }
+    private void InterNetStart()
     {
         FrameworkCore.Senes.ChangeScene(GameType.charactor);
     }
     private void OnDestroy()
     {
         StartUI.onClick.RemoveAllListeners();
-        FrameworkCore.UI.Pop(UILaye.Main);
+        Internet.onClick.RemoveAllListeners();
     }
     public void Open()
     {
-        transform.Find("Menu").gameObject.SetActive(true);
+       gameObject.SetActive(true);
     }
     public void Close()
     {
-        transform.Find("Menu").gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 }

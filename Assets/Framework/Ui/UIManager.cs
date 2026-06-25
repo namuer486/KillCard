@@ -4,13 +4,12 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public enum UILaye
 {
-    Background,
-    Main,
-    Popup,
+    Background,//背景
+    Main,//主要内容
+    Popup,//弹窗
     Guide//引导文本
 
 }
@@ -21,17 +20,6 @@ public interface BasePanel
 }
 public class UIManager : MonoBehaviour
 {
-    //private static UIManager instance = null;
-    //public static UIManager Instance
-    //{
-    //    get
-    //    {
-    //        if (instance != null)
-    //            return instance;
-    //        instance = new UIManager();
-    //        return instance;
-    //    }
-    //}
     private static UIManager instance = null;
     public static UIManager Instance
     {
@@ -61,9 +49,12 @@ public class UIManager : MonoBehaviour
         }
         instance = this;
         CreateTopCanvas();
-        GameObject Pause = Resources.Load<GameObject>("Prefab/PauseUi");
-        BackgroundList.Add(Pause);
         DontDestroyOnLoad(gameObject);
+    }
+    private void Start()
+    {
+        GameObject Pause = FrameworkCore.Resourse.ResourcesLoad<PauseUi>(ABConfig.Normal, "PauseUi").gameObject;
+        BackgroundList.Add(Pause);
     }
     public UIManager()
     {

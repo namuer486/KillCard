@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,10 +20,10 @@ public class PlayerManager
     public PlayerManager()
     {
         players = new List<Player>();
-        PlayersTable table = FrameworkCore.Resourse.ResourcesLoad<PlayersTable>("PlayersTable");
+        PlayersTable table = FrameworkCore.Resourse.ResourcesLoad<PlayersTable>(ABConfig.Table, "PlayersTable");
         foreach (PlayerConfig p in table.playerConfigs)
         {
-            Player player = new Player(p);
+            Player player = new Player(p, this);
             players.Add(player);
         }
     }
@@ -36,5 +35,11 @@ public class PlayerManager
             return;
         }
         currentplayer = players[id];
+        currentplayer.Reset();
+    }
+    public void CurrentPlayerDie()
+    {
+        currentplayer = null;
+        FrameworkCore.Senes.ChangeScene(GameType.over);
     }
 }

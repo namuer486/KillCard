@@ -55,19 +55,21 @@ public class GameCharactor : BaseState
 }
 public enum GameTempType
 {
-    normal,
-    attack
+    init,//初始化
+    player,//玩家回合
+    enemy//敌人回合
 }
 public class GamePlay : BaseState
 {
-    private StateManager<GameTempType> GamePlayManager; 
-    private StateManager<GameType> GameManager; 
+    private StateManager<GameTempType> GamePlayManager; //回合控制状态机
+    //private StateManager<GameType> GameManager; 
     public GamePlay()
     {
         GamePlayManager = new StateManager<GameTempType>();
-        GamePlayManager.AddState(GameTempType.normal,new GameNormal());
-        GamePlayManager.AddState(GameTempType.attack,new GameAttack());
-        GamePlayManager.ChangeState(GameTempType.normal);
+        GamePlayManager.AddState(GameTempType.init,new CardInit());
+        GamePlayManager.AddState(GameTempType.player,new PlayerNow());
+        GamePlayManager.AddState(GameTempType.enemy,new EnemyNow());
+        GamePlayManager.ChangeState(GameTempType.init);
     }
     public override void OnEnter()
     {
@@ -77,7 +79,10 @@ public class GamePlay : BaseState
         //挂上暂停Ui
         FrameworkCore.UI.LoadBackGroundUi();
         //TODO:实例化玩家角色
-        Debug.Log(GameCore.Player.currentplayer.config.name + "已被加载");
+        Debug.Log(GameCore.Player.currentplayer.Config.name + "已被加载");
+        //背包卡组加载
+        FrameworkCore.Event.OnTriggerEven("InitBag");
+        FrameworkCore.Event.OnTriggerEven("CardInit");
 
     }
     public override void OnUpDate()
@@ -88,10 +93,11 @@ public class GamePlay : BaseState
     }
     public override void OnExit() 
     {
-        GamePlayManager.ChangeState(GameTempType.normal);
+        GamePlayManager.ChangeState(GameTempType.init);
         GameCore.Instance.Is_Pause = false;
         FrameworkCore.Event.RemoveAll(this);
         FrameworkCore.UI.UnLoadBackGroundUi("PauseUi");
+        GameCore.Buff.Clear();
     }
     private void PuaseOver()
     {

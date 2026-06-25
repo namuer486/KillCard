@@ -9,19 +9,19 @@ public interface IPoolable//对象池对象需要继承此接口
 }
 public class Pool<T> where T : MonoBehaviour//泛型限定为继承自MonoBehaviour
 {
-    public Stack<T> stack {  get; private set; }
+    public Queue<T> quene {  get; private set; }
     public T Prefab { get; private set; }
     public Transform Parent { get; private set; }
     public Pool(T Prefab, int count = 0, Transform Parent = null)
     {
-        stack = new Stack<T>();
+        quene = new Queue<T>();
         this.Prefab = Prefab;
         this.Parent = Parent;
         for (int i = 0; i < count; i++)
         {
             T obj = Create();
             obj.gameObject.SetActive(false);
-            stack.Push(obj);
+            quene.Enqueue(obj);
         }
     }
     private T Create()
@@ -31,16 +31,17 @@ public class Pool<T> where T : MonoBehaviour//泛型限定为继承自MonoBehaviour
     }
     public T Get()
     {
-        if(stack.Count <= 0)
+        if(quene.Count <= 0)
         {
-            Debug.LogError(this + "对象池空了");
+            Debug.Log("对象池空了");
             return null;
         }
-        T obj = stack.Pop();
+        T obj = quene.Dequeue();
         if (obj is IPoolable poolable)
         {
             poolable.OnGet();
         }
+        obj.gameObject.SetActive(true);
         return obj;
     }
     public void Back(T obj)
@@ -54,21 +55,22 @@ public class Pool<T> where T : MonoBehaviour//泛型限定为继承自MonoBehaviour
             poolable.OnBack();
         }
         obj.gameObject.SetActive(false);
-        stack.Push(obj);
+        obj.transform.SetParent(Parent, false);
+        quene.Enqueue(obj);
     }
     public void Clear()
     {
-        if (stack.Count <= 0)
+        if (quene.Count <= 0)
         {
             return;
         }
-        foreach (var obj in stack)
+        foreach (var obj in quene)
         {
             if (obj)
             {
                 Object.Destroy(obj);
             }
         }
-        stack.Clear();
+        quene.Clear();
     }
 }

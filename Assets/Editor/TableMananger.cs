@@ -15,6 +15,7 @@ public static class TableMananger
     public static string Cardspath = "Assets/TableDate/CardConfig.xlsx";
     public static string Playerpath = "Assets/TableDate/PlayerConfig.xlsx";
     public static string Enemypath = "Assets/TableDate/EnemyConfig.xlsx";
+    public static string Buffpath = "Assets/TableDate/BuffConfig.xlsx";
     [MenuItem("工具/导表 → 生成物品配置")]
     public static void LoadCardsExcel()
     {
@@ -40,11 +41,10 @@ public static class TableMananger
                 string name = worksheet.Cells[row, 2].GetValue<string>();
                 string content = worksheet.Cells[row, 3].GetValue<string>();
                 CardType type = (CardType)worksheet.Cells[row, 4].GetValue<int>();
-                CardBuff buff = (CardBuff)worksheet.Cells[row, 5].GetValue<int>();
-                float number = worksheet.Cells[row, 6].GetValue<float>();
-                float buffnumber = worksheet.Cells[row, 7].GetValue<float>();
-                int livenumber = worksheet.Cells[row, 8].GetValue<int>();
-                string spritepath = worksheet.Cells[row, 9].GetValue<string>();
+                int buffid = worksheet.Cells[row, 5].GetValue<int>();
+                ToType totype = (ToType)worksheet.Cells[row, 6].GetValue<int>();
+                float number = worksheet.Cells[row, 7].GetValue<float>();
+                string spritepath = worksheet.Cells[row, 8].GetValue<string>();
                 //导出对应sprite
                 CardConfig kard = new CardConfig
                 {
@@ -52,10 +52,9 @@ public static class TableMananger
                     name = name,
                     content = content,
                     type = type,
-                    buff = buff,
+                    BuffID = buffid,
+                    totype=totype,
                     number = number,
-                    buffnumber = buffnumber,
-                    livenumber= livenumber
                     //sprite
                 };
                 Resources.Load<CardsTable>("CardsTable").kards.Add(kard);
@@ -108,7 +107,7 @@ public static class TableMananger
     [MenuItem("工具/导表 → 生成怪物配置")]
     public static void LoadEnemyExcel()
     {
-        if (!File.Exists(Playerpath))
+        if (!File.Exists(Enemypath))
         {
             Debug.Log("文件不存在");
             return;
@@ -143,6 +142,48 @@ public static class TableMananger
                 Resources.Load<EnemyTable>("EnemyTable").enemies.Add(enemy);
             }
             EditorUtility.SetDirty(Resources.Load<EnemyTable>("EnemyTable"));
+            Debug.Log("导入完成");
+        }
+    }
+    [MenuItem("工具/导表 → 生成Buff配置")]
+    public static void LoadBuffExcel()
+    {
+        if (!File.Exists(Buffpath))
+        {
+            Debug.Log("文件不存在");
+            return;
+        }
+        using (ExcelPackage package = new ExcelPackage(new FileInfo(Buffpath)))
+        {
+            if (package.Workbook.Worksheets.Count <= 0)
+            {
+                Debug.Log("没有工作表");
+                return;
+            }
+            ExcelWorksheet worksheet = package.Workbook.Worksheets["BuffConfig"];
+            int maxRow = worksheet.Dimension.Rows;
+
+            Resources.Load<BuffTable>("BuffTable").m_BuffList.Clear();
+            for(int row = 2; row < maxRow + 1; row++)
+            {
+                int ID=worksheet.Cells[row, 1].GetValue<int>();
+                string name = worksheet.Cells[row,2].GetValue<string>();
+                float time = worksheet.Cells[row, 3].GetValue<float>();//持续时间
+                int count = worksheet.Cells[row, 4].GetValue<int>();//层数
+                BuffType buffType = (BuffType)worksheet.Cells[row, 5].GetValue<int>();
+                    //导出对应sprite
+                BuffConfig buff = new BuffConfig
+                {
+                    ID = ID,
+                    name = name,
+                    time = time,
+                    count = count,
+                    buffType = buffType
+
+                };
+                Resources.Load<BuffTable>("BuffTable").m_BuffList.Add(buff);
+            }
+            EditorUtility.SetDirty(Resources.Load<BuffTable>("BuffTable"));
             Debug.Log("导入完成");
         }
     }

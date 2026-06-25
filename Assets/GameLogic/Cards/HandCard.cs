@@ -7,12 +7,14 @@ public class HandCard
 {
     public CardConfig config {  get; private set; }
     public float value {  get; private set; }//»ù´¡ÊýÖµ
-    public IBuff Buff {  get; internal set; }
+    public IUse Use { get; private set; }
+    public Buff buff {  get; internal set; }
     //Buff
-    public HandCard(IBuff buff,CardConfig config)
+    public HandCard(Buff buff,IUse use, CardConfig config)
     {
         this.config = config;
         value = config.number;
-        Buff = buff;
+        this.Use = use;
+        this.buff = buff;
     }
 }

@@ -1,26 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
-public class Player
+public class Player: Charocter
 {
-    public Player(PlayerConfig config)
+
+    public PlayerConfig Config { get; private set; }
+    public float HP {  get; private set; }
+    public PlayerManager Manager { get; private set; }
+
+    public Player(PlayerConfig config,PlayerManager manager)
     {
-        this.config = config;
+        this.Config = config;
+        Manager = manager;
     }
-    public PlayerConfig config { get; private set; }
-    //TODO:¶¯Ì¬Êý¾Ý£ºBuff
-
-    public void Hurt()
+    public void Reset()
     {
-
+        HP = Config.HP;
+        FrameworkCore.Event.OnTriggerEven("UpDateUI");
     }
-    public void AddBuff()
+    public override void Hurt(float value)
     {
-
+        HP -= value;
+        if (HP <= 0)
+        {
+            HP = 0;
+            Die();
+            return;
+        }
+        FrameworkCore.Event.OnTriggerEven("UpDateUI");
+        
     }
-    public void RemoveBuff()
+    public override void HpBack(float value)
     {
-
+        HP += value;
+        if (HP >= Config.HP)
+        {
+            HP = Config.HP;
+        }
+        FrameworkCore.Event.OnTriggerEven("UpDateUI");
+    }
+    public override void Die()
+    {
+        //gameover
+        FrameworkCore.Senes.ChangeScene(GameType.over);
+        Manager.CurrentPlayerDie();
     }
 }

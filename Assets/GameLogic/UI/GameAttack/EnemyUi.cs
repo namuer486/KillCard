@@ -6,6 +6,9 @@ using UnityEngine;
 public class EnemyUi : MonoBehaviour
 {
     public Enemy enemy {  get; internal set; }
+    public TextMeshProUGUI Name {  get; internal set; }
+    public TextMeshProUGUI Hp {  get; internal set; }
+
     //TODO:π÷ ﬁ≥ı ºªØ
     // Start is called before the first frame update
     void Start()
@@ -15,15 +18,14 @@ public class EnemyUi : MonoBehaviour
             Debug.LogError("π÷ ﬁŒ¥≈‰÷√");
             return;
         }
-        TextMeshProUGUI name = transform.Find("name").GetComponent<TextMeshProUGUI>();
-        if (name != null)
-        {
-            name.text = enemy.Config.name;
-        }
-        TextMeshProUGUI hp = transform.Find("HP").GetComponent<TextMeshProUGUI>();
-        if (hp != null)
-        {
-            hp.text = "HP:" + enemy.Config.HP.ToString();
-        }
+        Name = transform.Find("name").GetComponent<TextMeshProUGUI>();
+        Hp = transform.Find("HP").GetComponent<TextMeshProUGUI>();
+        UpDateUI();
+        FrameworkCore.Event.Add(this, "UpDateEnemyUI", UpDateUI);
+    }
+    private void UpDateUI()
+    {
+        Name.text = enemy.Config.name;
+        Hp.text = "HP:" + enemy.HP.ToString();
     }
 }

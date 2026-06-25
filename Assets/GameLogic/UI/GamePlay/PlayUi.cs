@@ -11,6 +11,7 @@ public class PlayUi : MonoBehaviour//地图Ui
     private void OnEnable()
     {
         FrameworkCore.Event.Add(this, "GamePuase", PauseBegin);
+        FrameworkCore.Event.Add(this, "AttackWin", AttackWin);
         StartAttack.onClick.AddListener(AttackBegin);//Test
     }
     private void Start()
@@ -33,7 +34,13 @@ public class PlayUi : MonoBehaviour//地图Ui
     private void AttackBegin()
     {
         FrameworkCore.Event.OnTriggerEven("LoadCurrentEnemy", 0);//DOTO：按钮内部需要内置关卡id
-        FrameworkCore.Senes.LoadTempScene(GameTempType.attack);
+        FrameworkCore.Senes.LoadTempScene(TempScene.Attack, () => { FrameworkCore.Event.OnTriggerEven("ChangeTempState", GameTempType.player); });
+    }
+    
+    private void AttackWin()
+    {
+        FrameworkCore.Senes.UnLoadTempScene(TempScene.Attack);
+        FrameworkCore.Senes.LoadTempScene(TempScene.AttackWin);
     }
     public void Open()
     {

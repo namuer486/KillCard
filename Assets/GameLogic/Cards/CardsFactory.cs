@@ -32,21 +32,40 @@ public class CardsFactory : MonoBehaviour
     }
     public HandCard CreateHandCard(CardConfig config)
     {
-        IBuff buff;
-        switch(config.buff)
+        Buff buff = null;
+        BuffTable buffTable = FrameworkCore.Resourse.ResourcesLoad<BuffTable>(ABConfig.Table, "BuffTable");
+        if(config.BuffID>=0)
         {
-            case CardBuff.Attack:
-                buff = new AttackBuff();
+            buff = GameCore.BuffFactory.GetBuff(buffTable.m_BuffList[config.BuffID]);
+        }
+        //switch (config.BuffID)
+        //{
+        //    case BuffType.Attack:
+        //        buff = new Buff(buffTable.m_BuffList[0]);//TODO：卡牌表里需要有Buff表的引用
+        //        break;
+        //    case BuffType.Defense:
+        //        buff = new Buff(buffTable.m_BuffList[1]);
+        //        break;
+        //    default:
+        //        buff = null;
+        //        break;
+
+        //}
+        IUse use = null;
+        switch (config.type)
+        {
+            case CardType.Attack:
+                use = new AttackUse();
                 break;
-            case CardBuff.Defense:
-                buff = new DefenseBuff();
+            case CardType.Defense:
+                use = new DefenseUse();
                 break;
             default:
-                buff = null;
+                use = null;
                 break;
 
         }
-        HandCard card = new HandCard(buff,config);
+        HandCard card = new HandCard(buff,use,config);
         return card;
     }
 }
